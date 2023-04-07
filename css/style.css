@@ -39,6 +39,9 @@ header {
     text-align: center;
     width: 100%;
     height: 55px;
+    border-radius: 30px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 #buttons_container{
@@ -46,6 +49,18 @@ header {
     width: 100%;
     place-items:center;
     grid-template-columns: 1fr 1fr 2fr
+}
+
+.icon {
+    transition: transform 0.4s ease-in;
+}
+
+.icon:hover{
+    transform: scale(1.1);
+}
+
+.icon:active{
+    transform: scale(1.1);
 }
 
 #submit_button{
@@ -69,22 +84,30 @@ header {
     transition: opacity 0.5s ease-in-out;
 }
 
-#app_navigation{
-    width:100%;
-    display: grid;
+#tweet_container{
+    margin-top: 20px;
+    display:grid;
+    width: 80%;
     place-items: center;
-    min-height: 8vh;
-    position: fixed;
-    background-color: #339af0;
-    bottom:0;
-    left:0
+    row-gap: 20px;
+    margin-bottom: 20px;
 }
 
-#home{
-    width:30px;
+.tweet_card{
+    width: 80%;
+    display: grid;
+    align-items: center;
+    row-gap: 12px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px 20px;
+    border-radius: 30px;
     transition: transform 0.3s ease-in;
 }
 
-#home:hover{
-    transform: scale(1.2);
+.tweet_card:hover {
+    transform: scale(1.03);
+}
+
+.tweet_card:active {
+    transform: scale(1.03);
 }
