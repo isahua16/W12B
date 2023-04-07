@@ -32,6 +32,7 @@ function tweet_success(res)
     document.querySelector(`body`).insertAdjacentHTML(`afterend`, `<p style="opacity: 0; background-color:#339af0; "id="user_msg">Your tweet was posted!</p>`);
     setTimeout(display_notification, 10);
     setTimeout(remove_notification, 3000);
+    document.querySelector(`#text_box`)[`value`] = ``;
 }
 
 function display_notification(event)

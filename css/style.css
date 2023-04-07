@@ -65,15 +65,26 @@ header {
     position: absolute;
     min-height: 3vh;
     color: white;
-    padding-top: 3px;
+    padding-top: 8px;
     transition: opacity 0.5s ease-in-out;
 }
 
 #app_navigation{
     width:100%;
+    display: grid;
+    place-items: center;
     min-height: 8vh;
     position: fixed;
     background-color: #339af0;
     bottom:0;
     left:0
+}
+
+#home{
+    width:30px;
+    transition: transform 0.3s ease-in;
+}
+
+#home:hover{
+    transform: scale(1.2);
 }
