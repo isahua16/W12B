@@ -1,15 +1,17 @@
 // ------------------------------------ Post function ----------------------------------------------
-
 function post_tweet(event)
 {   
+    //Get the value from the text_box field
     let tweet_body = document.querySelector(`#text_box`)[`value`];
     if(tweet_body === ``)
     {
+        //If the value is an empty string, display an error and stop the function
         display_error_message(`Write something to post!`);
         return;
     }
     else
     {
+        //Otherwise send the post request
         axios.request(
             {
                 url: `https://jsonplaceholder.typicode.com/posts`,
@@ -28,8 +30,14 @@ function post_tweet(event)
 
 function tweet_success(res)
 {
-    display_success_message(`Your tweet was posted`)
+    display_success_message(`Your tweet was posted`);
+    //Reset the text field value to empty if the post request was succesful
     document.querySelector(`#text_box`)[`value`] = ``;
+}
+
+function tweet_error(err)
+{
+    display_error_message(`Something went wrong. Try again!`);
 }
 
 function display_notification(event)
@@ -42,23 +50,21 @@ function remove_notification(event)
     document.querySelector(`#user_msg`)[`style`][`opacity`] = `0`;
 }
 
-function tweet_error(err)
-{
-    display_error_message(`Something went wrong. Try again!`);
-}
-
+//Created 2 utility functions to display messages to the user.
 function display_success_message(message)
 {
+    //If message is already displayed, remove it
     if(document.querySelector(`#user_msg`))
     {
         document.querySelector(`#user_msg`).remove();
     }
-    
+
+    //Insert the message, and set the timer for the smooth transition
     document.querySelector(`body`).insertAdjacentHTML(`afterend`, `<p style="opacity: 0; background-color:#339af0; "id="user_msg">${message}</p>`);
     setTimeout(display_notification, 10);
     setTimeout(remove_notification, 3000);
 }
-
+//Same logic as above.
 function display_error_message(message)
 {
     if(document.querySelector(`#user_msg`))
@@ -75,6 +81,7 @@ tweet_button.addEventListener(`click`, post_tweet);
 
 // ------------------------------------ Get function ----------------------------------------------
 
+//Loop over the arry of data and display it on the page
 function get_tweets_success(res)
 {
     for(let i = 0; i < res[`data`].length; i++)
@@ -95,6 +102,7 @@ function get_tweets_error(err)
 
 let tweet_container = document.querySelector(`#tweet_container`);
 
+//Make the axios call to get the tweets outside an event so that it displays on load
 axios.request(
     {
         url: `https://jsonplaceholder.typicode.com/posts`,
@@ -105,6 +113,7 @@ axios.request(
 
 function edit_tweet(event)
 {
+    //The patch function allows to only update one key's value, as opposed to the PUT which would overwrite everything. At least, that's what I understood from the documentation. Here, we are selection posts id=1 and patching only the body's value.
     axios.request(
         {
             url: `https://jsonplaceholder.typicode.com/posts/1`,
@@ -134,6 +143,7 @@ edit_button.addEventListener(`click`, edit_tweet);
 
 function delete_tweet(event)
 {
+    //Selection posts id=1 in the url and deleting it from the DB.
     axios.request(
         {
             url: `https://jsonplaceholder.typicode.com/posts/1`,
